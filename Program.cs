@@ -13,10 +13,10 @@ class Program
         const int MAX = 4;
 
         IIO userIO = new ConsoleIO();
-        IGoalGenerator goalGenerator = new MooGameGoalGenerator(MAX);
+        IGameLogic mooGameLogic = new MooGameLogic(MAX);
         IFileDetails mooFileDetails = new MooGameFileDetails(userIO);
         IHighScore mooGameHighScore = new MooGameHighScore(mooFileDetails, userIO);
-        MooGameController mooGameController = new MooGameController(userIO, goalGenerator, mooGameHighScore, mooFileDetails);
+        MooGameController mooGameController = new MooGameController(userIO, mooGameLogic, mooGameHighScore, mooFileDetails);
         mooGameController.PlayGame();
     }
 }

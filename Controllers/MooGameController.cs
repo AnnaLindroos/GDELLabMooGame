@@ -10,25 +10,25 @@ using LabMooGame.Interfaces;
 
 namespace LabMooGame.Controllers;
 
-public class MooGameController : IGame
+public class MooGameController : IGameController
 {
     private const int MAXCharacters = 4;
     private IIO _userIO;
-    private IGoalGenerator _goalGenerator;
+    private IGameLogic _mooGameLogic;
     private IHighScore _mooGameHighScore;
     private IFileDetails _mooGameFileDetails;
     private string _winningSequence;
     private int _numberOfGuesses;
 
-    public MooGameController(IIO userIO, IGoalGenerator goalGenerator, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
+    public MooGameController(IIO userIO, IGameLogic mooGameLogic, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
     {
         // sexy ways to handle errors instead of doing if statements, no need for nameofs either 
         ArgumentNullException.ThrowIfNull(userIO);
-        ArgumentNullException.ThrowIfNull(goalGenerator);
+        ArgumentNullException.ThrowIfNull(mooGameLogic);
         ArgumentNullException.ThrowIfNull(mooGameHighScore);
         ArgumentNullException.ThrowIfNull(mooGameFileDetails);
         _userIO = userIO;
-        _goalGenerator = goalGenerator;
+        _mooGameLogic = mooGameLogic;
         _mooGameHighScore = mooGameHighScore;
         _mooGameFileDetails = mooGameFileDetails;
     }
@@ -60,7 +60,7 @@ public class MooGameController : IGame
     public void StartNewGame(string userName)
     {
         _numberOfGuesses = 0;
-        _winningSequence = _goalGenerator.GenerateWinningSequence();
+        _winningSequence = _mooGameLogic.GenerateWinningSequence();
 
         _userIO.Write("New game\n");
         _userIO.Write("For practice, number is: " + _winningSequence + "\n");
@@ -75,10 +75,10 @@ public class MooGameController : IGame
             {
                 string userGuess = GetUserGuess();
                 _numberOfGuesses++;
-                string hint = GenerateHint(userGuess);
+                string hint = _mooGameLogic.GenerateHint(userGuess);
 
                 _userIO.Write(hint + "\n");
-                if (IsCorrectGuess(hint))
+                if (_mooGameLogic.IsCorrectGuess(hint))
                 {
                     break;
                 }
@@ -95,38 +95,6 @@ public class MooGameController : IGame
         _userIO.Write("Enter your guess:\n");
         return _userIO.Read();
     }
-
-    public string GenerateHint(string userGuess)
-    {
-        int bulls = 0, cows = 0;
-        userGuess = userGuess.PadRight(MAXCharacters);
-
-        for (int i = 0; i < MAXCharacters; i++)
-        {
-            for (int j = 0; j < MAXCharacters; j++)
-            {
-                if (_winningSequence[i] == userGuess[j])
-                {
-                    if (i == j)
-                    {
-                        bulls++;
-                    }
-                    else
-                    {
-                        cows++;
-                    }
-                }
-            }
-        }
-        return new string('B', bulls) + "," + new string('C', cows);
-    }
-
-    public bool IsCorrectGuess(string hint)
-    {
-        return hint == "BBBB,";
-    }
-
-
 
     public bool UserWantsToContinue()
     {

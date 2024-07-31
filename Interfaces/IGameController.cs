@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace LabMooGame.Interfaces;
 
-public interface IGame
+public interface IGameController
 {
     void PlayGame();
     void StartNewGame(string userName);
     void PlayRound();
     string GetUserGuess();
-    string GenerateHint(string userGuess);
-    bool IsCorrectGuess(string hint);
     bool UserWantsToContinue();
 }
