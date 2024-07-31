@@ -16,16 +16,21 @@ public class MooGameController : IGame
     private IIO _userIO;
     private IGoalGenerator _goalGenerator;
     private IHighScore _mooGameHighScore;
-    private IFileDetails _mooFileDetails;
+    private IFileDetails _mooGameFileDetails;
     private string _winningSequence;
     private int _numberOfGuesses;
 
-    public MooGameController(IIO userIO, IGoalGenerator goalGenerator, IHighScore mooGameHighScore, IFileDetails mooFileDetails)
+    public MooGameController(IIO userIO, IGoalGenerator goalGenerator, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
     {
+        // sexy ways to handle errors instead of doing if statements, no need for nameofs either 
+        ArgumentNullException.ThrowIfNull(userIO);
+        ArgumentNullException.ThrowIfNull(goalGenerator);
+        ArgumentNullException.ThrowIfNull(mooGameHighScore);
+        ArgumentNullException.ThrowIfNull(mooGameFileDetails);
         _userIO = userIO;
         _goalGenerator = goalGenerator;
         _mooGameHighScore = mooGameHighScore;
-        _mooFileDetails = mooFileDetails;
+        _mooGameFileDetails = mooGameFileDetails;
     }
 
     public void PlayGame()
@@ -39,7 +44,7 @@ public class MooGameController : IGame
         {
             StartNewGame(userName);
             PlayRound();
-            MakeGameResultsFile(userName);
+            _mooGameFileDetails.MakeGameResultsFile(userName, _numberOfGuesses);
             _mooGameHighScore.GetPlayerResults();
             _mooGameHighScore.DisplayHighScoreBoard();
 
@@ -57,7 +62,7 @@ public class MooGameController : IGame
         _numberOfGuesses = 0;
         _winningSequence = _goalGenerator.GenerateWinningSequence();
 
-        _userIO.Write("New game of Moo:\n");
+        _userIO.Write("New game\n");
         _userIO.Write("For practice, number is: " + _winningSequence + "\n");
     }
 
@@ -121,20 +126,7 @@ public class MooGameController : IGame
         return hint == "BBBB,";
     }
 
-    public void MakeGameResultsFile(string userName)
-    {
-        try
-        {
-            using (StreamWriter output = new StreamWriter(_mooFileDetails.GetFilePath(), append: true))
-            {
-                output.WriteLine($"{userName}#&#{_numberOfGuesses}");
-            }
-        }
-        catch (Exception e)
-        {
-            _userIO.Write($"Error writing to the results file: {e.Message}\n");
-        }
-    }
+
 
     public bool UserWantsToContinue()
     {

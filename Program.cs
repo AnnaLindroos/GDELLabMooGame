@@ -14,9 +14,9 @@ class Program
 
         IIO userIO = new ConsoleIO();
         IGoalGenerator goalGenerator = new MooGameGoalGenerator(MAX);
-        IFileDetails mooFileDetails = new MooGameFileDetails();
+        IFileDetails mooFileDetails = new MooGameFileDetails(userIO);
         IHighScore mooGameHighScore = new MooGameHighScore(mooFileDetails, userIO);
-        MooGameController mooGameController = new(userIO, goalGenerator, mooGameHighScore, mooFileDetails);
+        MooGameController mooGameController = new MooGameController(userIO, goalGenerator, mooGameHighScore, mooFileDetails);
         mooGameController.PlayGame();
     }
 }

@@ -13,7 +13,6 @@ public interface IGame
     void PlayRound();
     string GetUserGuess();
     string GenerateHint(string userGuess);
-    void MakeGameResultsFile(string userName);
     bool IsCorrectGuess(string hint);
     bool UserWantsToContinue();
 }

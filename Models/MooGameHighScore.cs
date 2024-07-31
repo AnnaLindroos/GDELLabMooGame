@@ -58,7 +58,7 @@ public class MooGameHighScore : IHighScore
         // it's a programmer error. May not want to catch it at all
         catch (Exception e) when (e is FileNotFoundException or DirectoryNotFoundException or IOException)
         {
-            _userIO.Write($"Error reading file. Error finding file, error finding directory or the file is busy: {e.Message}");
+            _userIO.Write($"Error finding file, error finding directory or the file is busy: {e.Message}");
             throw;
         }
         return results;
@@ -75,6 +75,7 @@ public class MooGameHighScore : IHighScore
 
             UpdatePlayerResults(results, playerName, guesses);
         }
+        // the most common errors when handling string formats
         catch (Exception e) when (e is FormatException or IndexOutOfRangeException)
         {
             _userIO.Write($"Error processing line '{line}': {e.Message}");
