@@ -89,6 +89,10 @@ public class MooGameHighScore : IHighScore
 
 
     // Kollar om spelarens data redan finns i listan. Om inte så läggs datan till, annars uppdateras spelarens befintliga highscore. 
+
+    // INDEXOF ta bort i längden, vad ska det ersättas med? Ta bort Equals och GenerateHashCode, om jag hittar alla andra ställen som använder dessa metoder. Looping over names in the list 
+
+
     private void UpdatePlayerResults(List<MooGamePlayer> results, string playerName, int guesses)
     {
         MooGamePlayer playerData = new MooGamePlayer(playerName, guesses);
@@ -124,6 +128,8 @@ public class MooGameHighScore : IHighScore
 
     public void SortHighScoreResults()
     {
-        _results.Sort((p1, p2) => p1.GetAverageGuesses().CompareTo(p2.GetAverageGuesses()));
+        _results.OrderBy(p => p.GetAverageGuesses());
+        // Tidigare detta, refaktoriserat till mer modern metod enklare att läsa
+        //_results.Sort((p1, p2) => p1.GetAverageGuesses().CompareTo(p2.GetAverageGuesses()));
     }
 }
