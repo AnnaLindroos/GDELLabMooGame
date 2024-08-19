@@ -32,16 +32,4 @@ public class MooGamePlayer
     {
         return (double)GuessesInTotal / NumberOfGames;
     }
-
-    //BRO WHEN ARE THESE USED
-    public override bool Equals(object player)
-    {
-        return PlayerName.Equals(((MooGamePlayer)player).PlayerName);
-    }
-
-    // WHEN USED?
-    public override int GetHashCode()
-    {
-        return PlayerName.GetHashCode();
-    }
 }
