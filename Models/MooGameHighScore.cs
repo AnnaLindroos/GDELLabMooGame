@@ -96,14 +96,16 @@ public class MooGameHighScore : IHighScore
     private void UpdatePlayerResults(List<MooGamePlayer> results, string playerName, int guesses)
     {
         MooGamePlayer playerData = new MooGamePlayer(playerName, guesses);
-        int pos = results.IndexOf(playerData);
-        if (pos < 0)
+
+        MooGamePlayer playerExists = results.Find(x => x.PlayerName == playerName);
+
+        if (playerExists == null)
         {
             results.Add(playerData);
         }
         else
         {
-            results[pos].UpdatePlayerHighScore(guesses);
+            playerExists.UpdatePlayerHighScore(guesses);
         }
     }
 
