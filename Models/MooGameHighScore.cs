@@ -12,7 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LabMooGame.Models;
-//static or no????
+
 public class MooGameHighScore : IHighScore
 {
     private IIO _userIO;
@@ -21,7 +21,6 @@ public class MooGameHighScore : IHighScore
 
     public MooGameHighScore(IFileDetails mooFileDetails, IIO userIO)
     {
-        // sexy ways to handle errors instead of doing if statements, no need for nameofs either 
         ArgumentNullException.ThrowIfNull(mooFileDetails);
         ArgumentNullException.ThrowIfNull(userIO);
         _userIO = userIO;
@@ -54,8 +53,7 @@ public class MooGameHighScore : IHighScore
                 }
             }
         }
-        // Gathering all the errors related to the FILE I'm trying to read, rather than the data I'm passing in . IF the argumentNullException pops up we don't want the USER to know,
-        // it's a programmer error. May not want to catch it at all
+        // Här samlas dom exceptions som StreamReader kan ge som relateras till FILEN jag försöker läsa ifrån. OM ArgumentNullException orsakas vill vi inte att användaren ska veta detta, eftersom det i så fall är ett fel av programmeraren.
         catch (Exception e) when (e is FileNotFoundException or DirectoryNotFoundException or IOException)
         {
             _userIO.Write($"Error finding file, error finding directory or the file is busy: {e.Message}");
@@ -75,7 +73,7 @@ public class MooGameHighScore : IHighScore
 
             UpdatePlayerResults(results, playerName, guesses);
         }
-        // the most common errors when handling string formats
+        // De vanligaste exceptions som kan uppstå när vi hanterar strängformattering
         catch (Exception e) when (e is FormatException or IndexOutOfRangeException)
         {
             _userIO.Write($"Error processing line '{line}': {e.Message}");
@@ -87,12 +85,6 @@ public class MooGameHighScore : IHighScore
         return line.Split(new string[] { "#&#" }, StringSplitOptions.None);
     }
 
-
-    // Kollar om spelarens data redan finns i listan. Om inte så läggs datan till, annars uppdateras spelarens befintliga highscore. 
-
-    // INDEXOF ta bort i längden, vad ska det ersättas med? Ta bort Equals och GenerateHashCode, om jag hittar alla andra ställen som använder dessa metoder. Looping over names in the list 
-
-
     private void UpdatePlayerResults(List<MooGamePlayer> results, string playerName, int guesses)
     {
         MooGamePlayer playerData = new MooGamePlayer(playerName, guesses);
@@ -101,12 +93,18 @@ public class MooGameHighScore : IHighScore
 
         if (playerExists == null)
         {
-            results.Add(playerData);
+            AddNewPlayerResults(playerData, results);
         }
         else
         {
             playerExists.UpdatePlayerHighScore(guesses);
         }
+    }
+
+    private void AddNewPlayerResults(MooGamePlayer playerData, List<MooGamePlayer> results)
+    {
+        results.Add(playerData);
+
     }
 
     public void DisplayHighScoreBoard()
@@ -131,7 +129,5 @@ public class MooGameHighScore : IHighScore
     public void SortHighScoreResults()
     {
         _results.OrderBy(p => p.GetAverageGuesses());
-        // Tidigare detta, refaktoriserat till mer modern metod enklare att läsa
-        //_results.Sort((p1, p2) => p1.GetAverageGuesses().CompareTo(p2.GetAverageGuesses()));
     }
 }

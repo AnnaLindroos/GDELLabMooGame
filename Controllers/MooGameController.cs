@@ -22,7 +22,6 @@ public class MooGameController : IGameController
 
     public MooGameController(IIO userIO, IGameLogic mooGameLogic, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
     {
-        // sexy ways to handle errors instead of doing if statements, no need for nameofs either 
         ArgumentNullException.ThrowIfNull(userIO);
         ArgumentNullException.ThrowIfNull(mooGameLogic);
         ArgumentNullException.ThrowIfNull(mooGameHighScore);
@@ -65,8 +64,6 @@ public class MooGameController : IGameController
         _userIO.Write("New game\n");
         _userIO.Write("For practice, number is: " + _winningSequence + "\n");
     }
-
-    // Catches exceptions specific to the game round logic, such as errors in processing guesses.
     public void PlayRound()
     {
         while (true)
