@@ -9,11 +9,10 @@ namespace LabMooGame.Models;
 
 public class MooGameFileDetails : IFileDetails
 {
-    // So that no one can access it and change it throughout the class 
     private readonly string _filePath = "hellomoogameresult.txt";
     private IIO _userIO;
 
-    public MooGameFileDetails(IIO userIO)
+    private MooGameFileDetails(IIO userIO)
     {
         _userIO = userIO;
     }

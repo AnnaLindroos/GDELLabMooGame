@@ -20,7 +20,7 @@ public class MooGameController : IGameController
     private string _winningSequence;
     private int _numberOfGuesses;
 
-    public MooGameController(IIO userIO, IGameLogic mooGameLogic, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
+    private MooGameController(IIO userIO, IGameLogic mooGameLogic, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
     {
         ArgumentNullException.ThrowIfNull(userIO);
         ArgumentNullException.ThrowIfNull(mooGameLogic);
