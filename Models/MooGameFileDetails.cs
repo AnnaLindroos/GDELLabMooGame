@@ -1,18 +1,14 @@
-﻿using LabMooGame.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LabMooGameG.Interfaces;
 
-namespace LabMooGame.Models;
+
+namespace LabMooGameG.Models;
 
 public class MooGameFileDetails : IFileDetails
 {
     private readonly string _filePath = "hellomoogameresult.txt";
     private IIO _userIO;
 
-    private MooGameFileDetails(IIO userIO)
+    public MooGameFileDetails(IIO userIO)
     {
         _userIO = userIO;
     }
@@ -21,6 +17,7 @@ public class MooGameFileDetails : IFileDetails
     {
         return _filePath;
     }
+
 
     public void MakeGameResultsFile(string userName, int numberOfGuesses)
     {

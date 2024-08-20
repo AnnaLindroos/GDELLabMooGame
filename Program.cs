@@ -1,10 +1,10 @@
-﻿using LabMooGame.Models;
-using LabMooGame;
-using LabMooGame.Interfaces;
+﻿using LabMooGameG.Models;
+using LabMooGameG;
+using LabMooGameG.Interfaces;
 using System.Runtime.InteropServices;
-using LabMooGame.Controllers;
+using LabMooGameG.Controllers;
 
-namespace MooGame;
+namespace MooGameG;
 
 class Program
 {

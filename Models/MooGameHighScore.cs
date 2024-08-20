@@ -1,17 +1,5 @@
-﻿using LabMooGame.Interfaces;
-using MooGame;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace LabMooGame.Models;
+﻿using LabMooGameG.Interfaces;
+namespace LabMooGameG.Models;
 
 public class MooGameHighScore : IHighScore
 {

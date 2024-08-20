@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using LabMooGame.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using LabMooGame.Interfaces;
+﻿
+using LabMooGameG.Interfaces;
 
-namespace LabMooGame.Controllers;
+namespace LabMooGameG.Controllers;
 
 public class MooGameController : IGameController
 {
@@ -20,7 +13,7 @@ public class MooGameController : IGameController
     private string _winningSequence;
     private int _numberOfGuesses;
 
-    private MooGameController(IIO userIO, IGameLogic mooGameLogic, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
+    public MooGameController(IIO userIO, IGameLogic mooGameLogic, IHighScore mooGameHighScore, IFileDetails mooGameFileDetails)
     {
         ArgumentNullException.ThrowIfNull(userIO);
         ArgumentNullException.ThrowIfNull(mooGameLogic);
