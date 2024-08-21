@@ -1,4 +1,5 @@
 ﻿using LabMooGameG.Interfaces;
+
 namespace LabMooGameG.Models;
 
 public class MooGameHighScore : IHighScore
@@ -42,7 +43,6 @@ public class MooGameHighScore : IHighScore
             }
         }
         // Här samlas dom exceptions som StreamReader kan ge som relateras till FILEN jag försöker läsa ifrån.
-        // OM ArgumentNullException orsakas vill vi inte att användaren ska veta detta, eftersom det i så fall är ett fel av programmeraren.
         catch (Exception e) when (e is FileNotFoundException or DirectoryNotFoundException or IOException)
         {
             _userIO.Write($"Error finding file, error finding directory or the file is busy: {e.Message}");

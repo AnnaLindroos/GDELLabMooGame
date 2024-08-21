@@ -1,6 +1,5 @@
 ﻿using LabMooGameG.Interfaces;
 
-
 namespace LabMooGameG.Models;
 
 public class MooGameFileDetails : IFileDetails
@@ -17,7 +16,6 @@ public class MooGameFileDetails : IFileDetails
     {
         return _filePath;
     }
-
 
     public void MakeGameResultsFile(string userName, int numberOfGuesses)
     {

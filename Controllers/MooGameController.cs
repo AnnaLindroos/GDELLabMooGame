@@ -1,5 +1,4 @@
-﻿
-using LabMooGameG.Interfaces;
+﻿using LabMooGameG.Interfaces;
 
 namespace LabMooGameG.Controllers;
 

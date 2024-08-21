@@ -1,6 +1,7 @@
 ﻿using LabMooGameG.Interfaces;
 
 namespace LabMooGameG.Models;
+
 public class MooGameLogic : IGameLogic
 {
     private int _goalLength;
