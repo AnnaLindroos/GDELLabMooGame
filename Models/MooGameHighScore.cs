@@ -117,6 +117,6 @@ public class MooGameHighScore : IHighScore
 
     public void SortHighScoreResults()
     {
-        _results.OrderBy(p => p.GetAverageGuesses());
+        _results = _results.OrderBy(p => p.GetAverageGuesses()).ToList();
     }
 }
