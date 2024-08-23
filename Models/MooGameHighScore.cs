@@ -52,7 +52,7 @@ public class MooGameHighScore : IHighScore
     }
 
 
-    public void ProcessPlayerData(string line, List<MooGamePlayer> results)
+    private void ProcessPlayerData(string line, List<MooGamePlayer> results)
     {
         try
         {
@@ -74,7 +74,7 @@ public class MooGameHighScore : IHighScore
         return line.Split(new string[] { "#&#" }, StringSplitOptions.None);
     }
 
-    public void UpdatePlayerResults(List<MooGamePlayer> results, string playerName, int guesses)
+    private void UpdatePlayerResults(List<MooGamePlayer> results, string playerName, int guesses)
     {
         MooGamePlayer playerData = new MooGamePlayer(playerName, guesses);
 
@@ -90,7 +90,7 @@ public class MooGameHighScore : IHighScore
         }
     }
 
-    public void AddNewPlayerResults(MooGamePlayer playerData, List<MooGamePlayer> results)
+    private void AddNewPlayerResults(MooGamePlayer playerData, List<MooGamePlayer> results)
     {
         results.Add(playerData);
     }
