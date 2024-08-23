@@ -52,7 +52,7 @@ public class MooGameHighScore : IHighScore
     }
 
 
-    private void ProcessPlayerData(string line, List<MooGamePlayer> results)
+    public void ProcessPlayerData(string line, List<MooGamePlayer> results)
     {
         try
         {
@@ -90,7 +90,7 @@ public class MooGameHighScore : IHighScore
         }
     }
 
-    private void AddNewPlayerResults(MooGamePlayer playerData, List<MooGamePlayer> results)
+    public void AddNewPlayerResults(MooGamePlayer playerData, List<MooGamePlayer> results)
     {
         results.Add(playerData);
     }
