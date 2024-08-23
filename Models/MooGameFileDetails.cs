@@ -4,7 +4,7 @@ namespace LabMooGameG.Models;
 
 public class MooGameFileDetails : IFileDetails
 {
-    private readonly string _filePath = "hellomoogameresult.txt";
+    private readonly string _filePath = "moogameresults.txt";
     private IIO _userIO;
 
     public MooGameFileDetails(IIO userIO)
