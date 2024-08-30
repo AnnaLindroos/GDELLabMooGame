@@ -1,6 +1,6 @@
 ﻿using LabMooGameG.Interfaces;
 
-namespace LabMooGameG.Models;
+namespace LabMooGameG.UI;
 
 public class ConsoleIO : IIO
 {

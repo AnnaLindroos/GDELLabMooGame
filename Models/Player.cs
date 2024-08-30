@@ -1,6 +1,6 @@
 ﻿namespace LabMooGameG.Models;
 
-public class MooGamePlayer 
+public class Player 
 {
     public string PlayerName { get; private set; }
 
@@ -8,7 +8,7 @@ public class MooGamePlayer
 
     public int GuessesInTotal { get; private set; }
 
-    public MooGamePlayer(string playerName, int guesses)
+    public Player(string playerName, int guesses)
     {
         PlayerName = playerName;
         NumberOfGames = 1;

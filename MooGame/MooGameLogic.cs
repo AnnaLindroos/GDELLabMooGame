@@ -1,6 +1,6 @@
 ﻿using LabMooGameG.Interfaces;
 
-namespace LabMooGameG.Models;
+namespace LabMooGameG.MooGame;
 
 public class MooGameLogic : IGameLogic
 {
@@ -14,14 +14,14 @@ public class MooGameLogic : IGameLogic
         {
             throw new ArgumentOutOfRangeException(nameof(goalLength), goalLength, "input must be between 1 and 10");
         }
-        _goalLength = goalLength; 
+        _goalLength = goalLength;
     }
     public string GenerateWinningSequence()
     {
         Random randomNumbers = new Random();
         var shuffled = _winningSequenceString.OrderBy(x => randomNumbers.Next());
         var substring = shuffled.Take(_goalLength);
-        _winningSequenceShuffled = new string (substring.ToArray());
+        _winningSequenceShuffled = new string(substring.ToArray());
         return _winningSequenceShuffled;
     }
 

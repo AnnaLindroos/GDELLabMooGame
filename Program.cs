@@ -1,6 +1,8 @@
 ﻿using LabMooGameG.Models;
 using LabMooGameG.Interfaces;
-using LabMooGameG.Controllers;
+using LabMooGameG.UI;
+using LabMooGameG.MooGame;
+using LabMooGameG.Data;
 
 namespace MooGameG;
 
@@ -8,14 +10,12 @@ class Program
 {
     public static void Main(string[] args)
     {
-        const int MAX = 4;
         IIO userIO = new ConsoleIO();
-        IGameLogic mooGameLogic = new MooGameLogic(MAX);
-        IFileDetails mooFileDetails = new MooGameFileDetails(userIO);
-        IHighScore mooGameHighScore = new MooGameHighScore(mooFileDetails, userIO);
 
-        MooGameController mooGameController = new MooGameController(userIO, mooGameLogic, mooGameHighScore, mooFileDetails);
-        mooGameController.PlayGame();
+        IDataContext dataContext = new DataContext(DataContextConfigCreator.CreateConfig());
+
+        Controller controller = new Controller(userIO, dataContext);
+        controller.RunProgram();
     }
 }
 
