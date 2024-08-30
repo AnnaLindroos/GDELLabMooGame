@@ -15,4 +15,9 @@ public class ConsoleIO : IIO
     {
         Console.WriteLine(message);
     }
+
+    public void WriteLine(string message)
+    {
+        Console.WriteLine($"{message}\n");
+    }
 }
