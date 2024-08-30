@@ -16,6 +16,7 @@ public class MooGameLogic : IGameLogic
         }
         _goalLength = goalLength;
     }
+
     public string GenerateWinningSequence()
     {
         Random randomNumbers = new Random();
