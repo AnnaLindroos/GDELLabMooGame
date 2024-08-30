@@ -2,7 +2,7 @@
 
 public class DataContextConfig
 {
-    public readonly string _filePathMooGame = "moohighscores";
+    public readonly string _filePathMooGame = "moohighscoresG";
     public DataContextConfig(string filePathMooGame)
     {
         ArgumentNullException.ThrowIfNull(filePathMooGame);

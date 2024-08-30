@@ -4,7 +4,7 @@
     {
         public static DataContextConfig CreateConfig()
         {
-            return new DataContextConfig("moohighscores");
+            return new DataContextConfig("moohighscoresG");
         }
     }
 }
