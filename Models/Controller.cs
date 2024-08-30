@@ -37,14 +37,14 @@ public class Controller : IController
                 _dataContext.CreateFile(userName, _numberOfGuesses);
                 _highScore = new HighScore(_dataContext);
                 _highScore.GetPlayerResults();
-                _userIO.Write("Player   games average");
+                _userIO.WriteLine("Player   games average");
                 List<Player> highScores = _highScore.GetHighScoreBoard();
                 foreach (Player player in highScores)
                 {
-                    _userIO.Write($"{player.PlayerName,-9}{player.NumberOfGames,5}{player.GetAverageGuesses(),9:F2}");
+                    _userIO.WriteLine($"{player.PlayerName,-9}{player.NumberOfGames,5}{player.GetAverageGuesses(),9:F2}");
                 }
 
-                _userIO.Write($"Correct, it took {_numberOfGuesses} guesses\nContinue?");
+                _userIO.WriteLine($"Correct, it took {_numberOfGuesses} guesses\nContinue?");
 
                 if (!UserWantsToContinue())
                 {
@@ -57,7 +57,7 @@ public class Controller : IController
 
     public bool UserWantsToPlay()
     {
-        _userIO.Write("Welcome! Press 1 to play MooGame or q to quit\n");
+        _userIO.WriteLine("Welcome! Press 1 to play MooGame or q to quit\n");
         string answer = _userIO.Read();
 
         switch (answer)
@@ -72,14 +72,14 @@ public class Controller : IController
                 return false;
 
             default:
-                _userIO.Write("Please press 1 to play the game or press q to quit");
+                _userIO.WriteLine("Please press 1 to play the game or press q to quit");
                 return false;
         }
     }
 
     public string PromptForUserName()
     {
-        _userIO.Write("Enter your user name:\n");
+        _userIO.WriteLine("Enter your user name:\n");
         return _userIO.Read();
     }
 
@@ -88,8 +88,8 @@ public class Controller : IController
         _numberOfGuesses = 0;
         _winningSequence = _gameLogic.GenerateWinningSequence();
 
-        _userIO.Write("New game:\n");
-        _userIO.Write($"For practice, number is: {_winningSequence} \n");
+        _userIO.WriteLine("New game:\n");
+        _userIO.WriteLine($"For practice, number is: {_winningSequence} \n");
     }
 
     // Catches exceptions specific to the game round logic, such as errors in processing guesses.
@@ -103,7 +103,7 @@ public class Controller : IController
                 _numberOfGuesses++;
                 string hint = _gameLogic.GenerateHint(userGuess);
 
-                _userIO.Write(hint + "\n");
+                _userIO.WriteLine(hint + "\n");
                 if (_gameLogic.IsCorrectGuess(hint))
                 {
                     break;
@@ -111,14 +111,14 @@ public class Controller : IController
             }
             catch (Exception e)
             {
-                _userIO.Write($"Error processing your guess: {e.Message}\n");
+                _userIO.WriteLine($"Error processing your guess: {e.Message}\n");
             }
         }
     }
 
     public string GetUserGuess()
     {
-        _userIO.Write("Enter your guess:\n");
+        _userIO.WriteLine("Enter your guess:\n");
         return _userIO.Read();
     }
 
@@ -131,7 +131,7 @@ public class Controller : IController
         }
         catch (Exception e)
         {
-            _userIO.Write($"Error reading your response: {e.Message}\n");
+            _userIO.WriteLine($"Error reading your response: {e.Message}\n");
             return false;
         }
     }
